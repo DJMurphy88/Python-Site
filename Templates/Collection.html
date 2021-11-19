@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Collection Display Page</title>
+</head>
+<body>
+    <h1>Game Collection</h1>
+
+    <h1>{{ games[0].getTitle() }}</h1>
+
+    {% for game in games %}
+        <h3>title: {{ game.getTitle() }}</h3>
+        <img src="static/images/{{ game.getImage() }}">
+        <h3>System: {{ game.getSystem() }}</h3>
+        <h3>Release Date: {{ game.getDate() }}</h3>
+        <h3>Genre: {{ game.getGenre() }}</h3>
+        <h3>Completed: {{ game.getComplete() }}</h3>
+    <br>
+    {% endfor %}
+    <a href="{{url_for('index')}}">Home Page</a>
+    <a href="{{url_for('submission')}}">Submit Game</a>
+    <a href="{{url_for('listGames')}}">Update Game</a>
+</body>
+</html>
