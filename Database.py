@@ -3,7 +3,7 @@ from contextlib import closing
 
 from Objects import Game
 
-DBFILE = "game_db.sqlite"
+DBFILE = "static/game_db.db"
 conn = None
 
 def connect():
@@ -19,8 +19,8 @@ def make_game(row):
     return Game(row["title"], row["image"], row["system"],
                 row["release_date"], row["genre"], row["complete"])
 
-def get_game():
-    query = '''SELECT title, image, system, release_date, genre, complete FROM Games'''
+def get_games():
+    query = '''SELECT * FROM Games'''
     with closing(conn.cursor()) as c:
         c.execute(query)
         results = c.fetchall()
@@ -28,10 +28,11 @@ def get_game():
     games = []
     for row in results:
         games.append(make_game(row))
+
     return games
 
 def add_game(game):
-    query = '''INSERT INTO Games (title, image, system, release_date, genre, complete)'''
+    query = '''INSERT INTO Games (title, image, system, release_date, genre, complete) Values(?, ?, ?, ?, ?, ?)'''
     with closing(conn.cursor()) as c:
         c.execute(query, game.getTitle(), game.getImage(), game.getSystem(),
                   game.getDate(), game.getGenre(), game.getComplete())

@@ -1,6 +1,6 @@
 class Game:
     def __init__(self, title, image, system, date, genre, complete):
-        self.__tile__ = title
+        self.__title__ = title
         self.__image__ = image
         self.__system__ = system
         self.__date__ = date
@@ -8,7 +8,7 @@ class Game:
         self.__complete__ = complete
 
     def getTitle(self):
-        return self.__tile__
+        return self.__title__
 
     def getImage(self):
         return self.__image__
