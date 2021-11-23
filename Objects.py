@@ -1,26 +1,26 @@
 class Game:
     def __init__(self, title, image, system, date, genre, complete):
-        self.__title__ = title
-        self.__image__ = image
-        self.__system__ = system
-        self.__date__ = date
-        self.__genre__ = genre
-        self.__complete__ = complete
+        self.__title = title
+        self.__image = image
+        self.__system = system
+        self.__date = date
+        self.__genre = genre
+        self.__complete = complete
 
     def getTitle(self):
-        return self.__title__
+        return self.__title
 
     def getImage(self):
-        return self.__image__
+        return self.__image
 
     def getSystem(self):
-        return self.__system__
+        return self.__system
 
     def getDate(self):
-        return self.__date__
+        return self.__date
 
     def getGenre(self):
-        return self.__genre__
+        return self.__genre
 
     def getComplete(self):
-        return self.__complete__
+        return self.__complete

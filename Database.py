@@ -34,8 +34,8 @@ def get_games():
 def add_game(game):
     query = '''INSERT INTO Games (title, image, system, release_date, genre, complete) Values(?, ?, ?, ?, ?, ?)'''
     with closing(conn.cursor()) as c:
-        c.execute(query, game.getTitle(), game.getImage(), game.getSystem(),
-                  game.getDate(), game.getGenre(), game.getComplete())
+        c.execute(query, (game.getTitle(), game.getImage(), game.getSystem(),
+                  game.getDate(), game.getGenre(), game.getComplete()))
         conn.commit()
 
 def update_game(title, image, system, date, genre, complete):

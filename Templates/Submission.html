@@ -5,6 +5,38 @@
     <title>Collection Submission Page</title>
 </head>
 <body>
+    <form method="POST" action="" enctype="multipart/form-data"
+          name="submission_form" id="submission_form">
+        <div>
+            <label for= "title">Title:</label>
+            <input type="text" name="title" id="title">
+        </div>
+        <div>
+            <label for= "system">System</label>
+            <input type="text" name="system" id="system">
+        </div>
+        <div>
+            <label for="release_date">Release Date</label>
+            <input type="text" name="release_date" id="release_date">
+        </div>
+        <div>
+            <label for="genre">Genre:</label>
+            <input type="text" name="genre" id="genre">
+        </div>
+        <div>
+            <label>Completed</label>
+            <input type="radio" name="completed" id="no" value="No" class="left" checked>No
+            <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
+        </div>
+        <div>
+            <label>Image:</label>
+            <input type="file" name="file" accept=".png, .jfif, .jpg, .jpeg">
+        </div>
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+
+    </form>
     <a href="{{url_for('index')}}">Home Page</a>
     <a href="{{url_for('collection')}}">Display Collection</a>
 </body>
