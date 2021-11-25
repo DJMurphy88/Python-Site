@@ -22,13 +22,16 @@ def collection():
 
 @app.route("/listGames")
 def listGames():
-    return render_template("List.html")
+    Database.connect()
+    games = Database.get_games()
+    Database.close()
+    return render_template("List.html", games=games)
 
 @app.route("/submission")
 def submission():
     return render_template("Submission.html")
 
-@app.route("/submission", methods = ['POST'])
+@app.route("/submission", methods=['POST'])
 def getFormData():
     uploaded_file = request.files["file"]
     filename = secure_filename(uploaded_file.filename)
@@ -44,8 +47,10 @@ def getFormData():
         if file_ext not in app.config['UPLOAD_EXTENSIONS']:
             abort(400)
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
-        game = Game(title, filename, system, release_date, genre, completed)
+
         Database.connect()
+        gameid = Database.get_row_count() + 1
+        game = Game(gameid, title, filename, system, release_date, genre, completed)
         Database.add_game(game)
         Database.close()
     return redirect("collection")
@@ -53,3 +58,18 @@ def getFormData():
 @app.route("/update")
 def update():
     return render_template("Update.html")
+
+@app.route("/delete", methods=['GET', 'POST'])
+def delete():
+    gameid = int(request.args.get('gameid'))
+
+    Database.connect()
+    game = Database.get_game(gameid)
+    filename = game.getImage()
+
+    Database.delete_game(gameid)
+    os.remove(os.path.join(app.config['UPLOAD_PATH'], filename))
+
+    Database.close()
+
+    return redirect("listGames")

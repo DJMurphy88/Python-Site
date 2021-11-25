@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Collection List Page</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}Collection List{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% for game in games %}
+    <p>{{ game.getTitle() }}
+        <a href="{{ url_for('update') }}?gameid={{ game.getGameID() }}">Update</a>
+        <a href="{{ url_for('delete') }}?gameid={{ game.getGameID() }}">Delete</a>
+    </p>
+    {% endfor %}
     <a href="{{url_for('index')}}">Home Page</a>
     <a href="{{url_for('collection')}}">Display Collection</a>
-</body>
-</html>
+{% endblock %}

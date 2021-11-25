@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Collection Main Page</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}Homepage{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
     <h1>Welcome to your Game Collection</h1>
     <a href="{{url_for('collection')}}">Display Collection</a>
     <a href="{{url_for('listGames')}}">List Games</a>
-</body>
-</html>
+{% endblock %}

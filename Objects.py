@@ -1,11 +1,15 @@
 class Game:
-    def __init__(self, title, image, system, date, genre, complete):
+    def __init__(self, gameid, title, image, system, date, genre, complete):
+        self.__gameid = gameid
         self.__title = title
         self.__image = image
         self.__system = system
         self.__date = date
         self.__genre = genre
         self.__complete = complete
+
+    def getGameID(self):
+        return self.__gameid
 
     def getTitle(self):
         return self.__title

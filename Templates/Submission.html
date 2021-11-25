@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Collection Submission Page</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}Submission{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
     <form method="POST" action="" enctype="multipart/form-data"
           name="submission_form" id="submission_form">
         <div>
@@ -39,5 +38,4 @@
     </form>
     <a href="{{url_for('index')}}">Home Page</a>
     <a href="{{url_for('collection')}}">Display Collection</a>
-</body>
-</html>
+{% endblock %}
