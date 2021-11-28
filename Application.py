@@ -9,9 +9,13 @@ app = Flask(__name__)
 app.config['UPLOAD_PATH'] = 'static/images'
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jfif']
 
-@app.route("/")
+@app.route("/", methods=['POST', 'GET'])
 def index():
-    return render_template("Index.html")
+    return render_template("index.html")
+
+@app.route("/home")
+def home():
+    return render_template("home.html")
 
 @app.route("/collection")
 def collection():
@@ -49,7 +53,7 @@ def getFormData():
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
 
         Database.connect()
-        gameid = Database.get_row_count() + 1
+        gameid = Database.get_row_count("Games") + 1
         game = Game(gameid, title, filename, system, release_date, genre, completed)
         Database.add_game(game)
         Database.close()

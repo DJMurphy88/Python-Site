@@ -1,7 +1,7 @@
 import sqlite3
 from contextlib import closing
 
-from Objects import Game
+from Objects import Game, User
 
 DBFILE = "static/game_db.db"
 conn = None
@@ -15,10 +15,10 @@ def close():
     if conn:
         conn.close()
 
-def get_row_count():
-    query = '''SELECT COUNT(*) FROM Games'''
+def get_row_count(table):
+    query = '''SELECT COUNT(*) FROM ?'''
     with closing(conn.cursor()) as c:
-        c.execute(query)
+        c.execute(query, table)
         results = c.fetchone()
 
     return results[0]
@@ -66,3 +66,24 @@ def delete_game(gameid):
     with closing(conn.cursor()) as c:
         c.execute(query, (gameid,))
         conn.commit()
+
+def make_user(row):
+    return User(row["userid"], row["username"], row["password"])
+
+def get_users():
+    query = '''SELECT * FROM Users'''
+    with closing(conn.cursor()) as c:
+        c.execute(query)
+        results = c.fetchall()
+
+    users = []
+    for row in results:
+        users.append(make_user(row))
+
+    return users
+
+def add_user(user):
+    query = '''INSERT INTO Users (username, password) VALUES(?, ?)'''
+    with closing(conn.cursor()) as c:
+        c.execute(query, (user.getUsername(), user.getPassword()))
+    conn.commit()

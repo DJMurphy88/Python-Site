@@ -5,10 +5,11 @@
 {% endblock %}
 {% block content %}
     {% for game in games %}
-    <p>{{ game.getTitle() }}
-        <a href="{{ url_for('update') }}?gameid={{ game.getGameID() }}">Update</a>
-        <a href="{{ url_for('delete') }}?gameid={{ game.getGameID() }}">Delete</a>
-    </p>
+    <div>
+        <label class="list">{{ game.getTitle() }}</label>
+        <a href="{{ url_for('update') }}?gameid={{ game.getGameID() }}" class="list">Update</a>
+        <a href="{{ url_for('delete') }}?gameid={{ game.getGameID() }}" class="list">Delete</a>
+    </div>
     {% endfor %}
     <a href="{{url_for('index')}}">Home Page</a>
     <a href="{{url_for('collection')}}">Display Collection</a>
