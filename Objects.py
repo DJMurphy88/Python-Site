@@ -28,18 +28,3 @@ class Game:
 
     def getComplete(self):
         return self.__complete
-
-class User:
-    def __init__(self, userid, username, password):
-        self.__userid = userid
-        self.__username = username
-        self.__password = password
-
-    def getUserID(self):
-        return self.__userid
-
-    def getUsername(self):
-        return self.__username
-
-    def getPassword(self):
-        return self.__password

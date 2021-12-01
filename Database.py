@@ -1,7 +1,7 @@
 import sqlite3
 from contextlib import closing
 
-from Objects import Game, User
+from Objects import Game
 
 DBFILE = "static/game_db.db"
 conn = None
@@ -15,10 +15,10 @@ def close():
     if conn:
         conn.close()
 
-def get_row_count(table):
-    query = '''SELECT COUNT(*) FROM ?'''
+def get_row_count():
+    query = '''SELECT COUNT(*) FROM Games'''
     with closing(conn.cursor()) as c:
-        c.execute(query, table)
+        c.execute(query)
         results = c.fetchone()
 
     return results[0]
@@ -40,10 +40,16 @@ def get_games():
     return games
 
 def get_game(gameid):
-    games = get_games()
-    for game in games:
-        if game.getGameID() == gameid:
-            return game
+    query = '''SELECT * FROM Games WHERE gameid = ?'''
+    with closing(conn.cursor()) as c:
+        c.execute(query, str(gameid))
+        result = c.fetchall()
+
+    game = []
+    for row in result:
+        game.append(make_game(row))
+
+    return game[0]
 
 def add_game(game):
     query = '''INSERT INTO Games (title, image, system, release_date, genre, complete) Values(?, ?, ?, ?, ?, ?)'''
@@ -53,7 +59,8 @@ def add_game(game):
         conn.commit()
 
 def update_game(gameid, title, image, system, date, genre, complete):
-    query = '''UPDATE Games SET title = ?, image = ?, system = ?, 
+    query = '''UPDATE Games
+                SET title = ?, image = ?, system = ?, 
                 release_date = ?, genre = ?, complete = ?
                 WHERE gameid = ?'''
 
@@ -67,23 +74,3 @@ def delete_game(gameid):
         c.execute(query, (gameid,))
         conn.commit()
 
-def make_user(row):
-    return User(row["userid"], row["username"], row["password"])
-
-def get_users():
-    query = '''SELECT * FROM Users'''
-    with closing(conn.cursor()) as c:
-        c.execute(query)
-        results = c.fetchall()
-
-    users = []
-    for row in results:
-        users.append(make_user(row))
-
-    return users
-
-def add_user(user):
-    query = '''INSERT INTO Users (username, password) VALUES(?, ?)'''
-    with closing(conn.cursor()) as c:
-        c.execute(query, (user.getUsername(), user.getPassword()))
-    conn.commit()

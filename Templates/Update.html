@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <form method="POST" action="" enctype="multipart/form-data"
-          name="submission_form" id="submission_form">
+          name="update_form" id="update_form">
         <div>
             <label for= "title">Title:</label>
             <input type="text" name="title" id="title" value="{{ game.getTitle() }}">
@@ -16,23 +16,31 @@
         </div>
         <div>
             <label for="release_date">Release Date</label>
-            <input type="text" name="release_date" id="release_date" value="{{ game.getDate }}">
+            <input type="text" name="release_date" id="release_date" value="{{ game.getDate() }}">
         </div>
         <div>
             <label for="genre">Genre:</label>
-            <input type="text" name="genre" id="genre" value="{{ game.getGenre }}">
+            <input type="text" name="genre" id="genre" value="{{ game.getGenre() }}">
         </div>
         <div>
             <label>Completed</label>
-            <input type="radio" name="completed" id="no" value="No" class="left" checked>No
-            <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
+            {% if game.getComplete() == "Yes" %}
+                <input type="radio" name="completed" id="no" value="No" class="left">No
+                <input type="radio" name="completed" id="yes" value="Yes" class="left last" checked>Yes
+            {% elif game.getComplete() == "No" %}
+                <input type="radio" name="completed" id="no" value="No" class="left" checked>No
+                <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
+            {% else %}
+                <input type="radio" name="completed" id="no" value="No" class="left">No
+                <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
+            {% endif %}
         </div>
         <div>
             <label>Image:</label>
             <input type="file" name="file" accept=".png, .jfif, .jpg, .jpeg">
         </div>
         <div>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Update">
         </div>
 
     </form>
