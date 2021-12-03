@@ -69,11 +69,11 @@ def update():
         return render_template("Update.html", game=game)
 
 
-@app.route("/update", methods=['POST'])
+@app.route("/update", methods=['GET','POST'])
 def getUpdateData():
-
-    gameid = request.args.get('gameid')
-    app.logger.info(gameid)
+    gameid = int(request.args.get('gameid'))
+    Database.connect()
+    game = Database.get_game(gameid)
 
     uploaded_file = request.files["file"]
     title = request.values["title"]
@@ -83,18 +83,16 @@ def getUpdateData():
     completed = request.form.get("completed")
     os.makedirs(app.config['UPLOAD_PATH'], exist_ok=True)
 
-    Database.connect()
-    game = Database.get_game(gameid)
-    if uploaded_file == "":
-        filename = game.getImage()
-
-    else:
+    if "file" in request.form:
         filename = secure_filename(uploaded_file.filename)
         file_ext = os.path.splitext(filename)[1]
         if file_ext not in app.config['UPLOAD_EXTENSIONS']:
             abort(400)
         os.remove(os.path.join(app.config['UPLOAD_PATH'], game.getImage()))
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+
+    else:
+        filename = game.getImage()
 
     Database.update_game(gameid, title, filename, system, release_date, genre, completed)
     Database.close()

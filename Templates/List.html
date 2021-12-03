@@ -7,8 +7,8 @@
     {% for game in games %}
     <div>
         <label class="list">{{ game.getTitle() }}</label>
-        <a href="{{ url_for('update') }}?gameid={{ game.getGameID() }}" class="list">Update</a>
-        <a href="{{ url_for('delete') }}?gameid={{ game.getGameID() }}" class="list">Delete</a>
+        <a href="{{ url_for('update', gameid=game.getGameID()) }}" class="list">Update</a>
+        <a href="{{ url_for('delete', gameid=game.getGameID()) }}" class="list">Delete</a>
     </div>
     {% endfor %}
     <a href="{{url_for('index')}}">Home Page</a>
