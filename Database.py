@@ -39,6 +39,30 @@ def get_games():
 
     return games
 
+def get_games_by_system():
+    query = '''SELECT * FROM Games ORDER BY system'''
+    with closing(conn.cursor()) as c:
+        c.execute(query)
+        results = c.fetchall()
+
+    games = []
+    for row in results:
+        games.append(make_game(row))
+
+    return games
+
+def get_games_by_genre():
+    query = '''SELECT * FROM Games ORDER BY genre'''
+    with closing(conn.cursor()) as c:
+        c.execute(query)
+        results = c.fetchall()
+
+    games = []
+    for row in results:
+        games.append(make_game(row))
+
+    return games
+
 def get_game(gameid):
     query = '''SELECT * FROM Games WHERE gameid = ?'''
     with closing(conn.cursor()) as c:

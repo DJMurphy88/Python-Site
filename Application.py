@@ -11,15 +11,25 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jfif']
 
 @app.route("/")
 def index():
+
     return render_template("index.html")
 
-@app.route("/collection")
+@app.route("/collection", methods=['GET'])
 def collection():
+    sort = request.args.get('sort')
+
     Database.connect()
-    games = Database.get_games()
+    if sort == "system":
+        games = Database.get_games_by_system()
+
+    elif sort == "genre":
+        games = Database.get_games_by_genre()
+
+    else:
+        games = Database.get_games()
     Database.close()
 
-    return render_template("Collection.html", games=games)
+    return render_template("Collection.html", games=games, sort=sort)
 
 @app.route("/listGames")
 def listGames():
@@ -69,7 +79,7 @@ def update():
         return render_template("Update.html", game=game)
 
 
-@app.route("/update", methods=['GET','POST'])
+@app.route("/update", methods=['GET', 'POST'])
 def getUpdateData():
     gameid = int(request.args.get('gameid'))
     Database.connect()

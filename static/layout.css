@@ -1,15 +1,12 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
-    margin: 0 auto;
-    width: 600px;
-    border: 3px solid blue;
-    padding: 0 2em 1em;
+    background-color: black;
 }
 h1 {
-    color: blue;
+    color: darkgreen;
 }
 div {
+    background-color: white;
     margin-bottom: 0.5em;
 }
 fieldset {
@@ -27,7 +24,7 @@ label {
     display: inline-block;
     width: 6em;
 }
-label.list {
+label .list {
         display: inline-block;
         width: 12em;
 }
@@ -52,4 +49,25 @@ p {
 }
 span {
 	color: red;
+}
+
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.table .table-image {
+    border-color: inherit;
+    width="250";
+}
+
+.table .table-title {
+    border-color: inherit;
+    width= 80%
 }

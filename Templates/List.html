@@ -1,16 +1,37 @@
 {% extends "layout.html" %}
-{% block title %}Collection List{% endblock %}
+{% block title %}Collection Display{% endblock title %}
+
 {% block head %}
     {{ super() }}
-{% endblock %}
-{% block content %}
-    {% for game in games %}
-    <div>
-        <label class="list">{{ game.getTitle() }}</label>
-        <a href="{{ url_for('update', gameid=game.getGameID()) }}" class="list">Update</a>
-        <a href="{{ url_for('delete', gameid=game.getGameID()) }}" class="list">Delete</a>
-    </div>
-    {% endfor %}
+{% endblock head %}
+
+{% block linkbar %}
     <a href="{{url_for('index')}}">Home Page</a>
     <a href="{{url_for('collection')}}">Display Collection</a>
-{% endblock %}
+    List Games
+    <a href="{{url_for('submission')}}">Submit Game</a>
+{% endblock linkbar %}
+
+{% block content %}
+    <table align="center" width="60%" class="table">
+    {% for game in games %}
+        <tbody>
+            <tr>
+                <td>
+                    <b>title:</b> {{ game.getTitle() }}
+                </td>
+                <td>
+                    <b>System:</b> {{ game.getSystem() }}
+                </td>
+                <td width="6">
+                    <a href="{{ url_for('update', gameid=game.getGameID()) }}">Update</a>
+                </td>
+                <td width="6">
+                    <a href="{{ url_for('delete', gameid=game.getGameID()) }}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+
+{% endblock content %}

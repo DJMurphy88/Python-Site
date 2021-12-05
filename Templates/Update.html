@@ -1,26 +1,38 @@
 {% extends "layout.html" %}
-{% block title %}Update{% endblock %}
+{% block title %}Collection Display{% endblock title %}
+
 {% block head %}
     {{ super() }}
-{% endblock %}
+{% endblock head %}
+
+{% block linkbar %}
+    <a href="{{url_for('index')}}">Home Page</a>
+    <a href="{{url_for('collection')}}">Display Collection</a>
+    <a href="{{url_for('submission')}}">Submit Game</a>
+{% endblock linkbar %}
+
 {% block content %}
     <form method="POST" action="" enctype="multipart/form-data"
           name="update_form" id="update_form">
         <div>
             <label for= "title">Title:</label>
             <input type="text" name="title" id="title" value="{{ game.getTitle() }}">
+            <span>*</span>
         </div>
         <div>
             <label for= "system">System</label>
             <input type="text" name="system" id="system" value="{{ game.getSystem() }}">
+            <span>*</span>
         </div>
         <div>
             <label for="release_date">Release Date</label>
             <input type="text" name="release_date" id="release_date" value="{{ game.getDate() }}">
+            <span>*</span>
         </div>
         <div>
             <label for="genre">Genre:</label>
             <input type="text" name="genre" id="genre" value="{{ game.getGenre() }}">
+            <span>*</span>
         </div>
         <div>
             <label>Completed</label>
@@ -46,4 +58,6 @@
     </form>
     <a href="{{url_for('index')}}">Home Page</a>
     <a href="{{url_for('collection')}}">Display Collection</a>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="static/validate.js"></script>
 {% endblock %}

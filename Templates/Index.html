@@ -1,10 +1,24 @@
 {% extends "layout.html" %}
-{% block title %}Homepage{% endblock %}
+{% block title %}Homepage{% endblock title %}
+
 {% block head %}
     {{ super() }}
-{% endblock %}
-{% block content %}
-    <h1>Welcome to Game Collection</h1>
+{% endblock head %}
+
+{% block header %}
+    {{ super() }}
+{% endblock header %}
+
+{% block linkbar %}
+    Home Page
     <a href="{{url_for('collection')}}">Display Collection</a>
-    <a href="{{url_for('listGames')}}">List Games</a>
-{% endblock %}
+    <a href="{{url_for('submission')}}">Submit Game</a>
+{% endblock linkbar %}
+
+{% block content %}
+Collection stats:
+total games:
+Completed:
+Most popular System:
+Most popular Genre:
+{% endblock content %}

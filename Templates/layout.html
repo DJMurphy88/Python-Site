@@ -5,12 +5,24 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} - Collection Page</title>
     <link rel="stylesheet" href="static/layout.css">
-    {% endblock %}
+    {% endblock head %}
 </head>
+<header>
+    <div align="center">
+        {% block header %}
+        <h1 align="center">Game Collection</h1>
+        {% endblock header %}
+    </div>
+    <div align="center">
+        {% block linkbar %}
+        {% endblock linkbar %}
+    </div>
+
+</header>
 <body>
-    <div id="content">
+    <div>
         {% block content %}
-        {% endblock %}
+        {% endblock content %}
     </div>
 </body>
 </html>

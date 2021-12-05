@@ -1,21 +1,63 @@
 {% extends "layout.html" %}
-{% block title %}Collection Display{% endblock %}
+{% block title %}Collection Display{% endblock title %}
+
 {% block head %}
     {{ super() }}
-{% endblock %}
-{% block content %}
-    <h1>Game Collection</h1>
+{% endblock head %}
 
-    {% for game in games %}
-        <h3>{{ game.getTitle() }}</h3>
-        <img src="static/images/{{ game.getImage() }}">
-        <h3>System: {{ game.getSystem() }}</h3>
-        <h3>Release Date: {{ game.getDate() }}</h3>
-        <h3>Genre: {{ game.getGenre() }}</h3>
-        <h3>Completed: {{ game.getComplete() }}</h3>
-    <br>
-    {% endfor %}
+{% block linkbar %}
     <a href="{{url_for('index')}}">Home Page</a>
+    Display Collection
     <a href="{{url_for('submission')}}">Submit Game</a>
-    <a href="{{url_for('listGames')}}">List Games</a>
-{% endblock %}
+{% endblock linkbar %}
+
+{% block content %}
+    <p align="center">
+        Sort by:
+        {% if sort == "system" %}
+        <a href="{{url_for('collection', sort='title')}}">Title</a>
+        System
+        <a href="{{url_for('collection', sort='genre')}}">Genre</a>
+        {% elif sort == "genre" %}
+        <a href="{{url_for('collection', sort='title')}}">Title</a>
+        <a href="{{url_for('collection', sort=system)}}">System</a>
+        genre
+        {% else %}
+        Title
+        <a href="{{url_for('collection', sort='system')}}">System</a>
+        <a href="{{url_for('collection', sort='genre')}}">Genre</a>
+        {% endif %}
+    </p>
+    {% for game in games %}
+    <table align="center" width="60%" class="table">
+        <tbody>
+            <tr>
+                <td class="table-image" rowspan="3" width="250">
+                    <img src="static/images/{{ game.getImage() }}" width="250" height="200">
+                </td>
+                <td  class="table-title">
+                    {{ game.getTitle() }}
+                </td>
+            </tr>
+            <tr>
+                <td class="table-info">
+                    System: {{ game.getSystem() }}
+                    <br>
+                    Release Date: {{ game.getDate() }}
+                    <br>
+                    Genre: {{ game.getGenre() }}
+                    <br>
+                    Completed: {{ game.getComplete() }}
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td class ="Table-links">
+                    <a href="{{ url_for('update', gameid=game.getGameID()) }}">Update</a>
+                    <a href="{{ url_for('delete', gameid=game.getGameID()) }}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
+{% endblock content %}
