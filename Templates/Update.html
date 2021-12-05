@@ -6,9 +6,7 @@
 {% endblock head %}
 
 {% block linkbar %}
-    <a href="{{url_for('index')}}">Home Page</a>
-    <a href="{{url_for('collection')}}">Display Collection</a>
-    <a href="{{url_for('submission')}}">Submit Game</a>
+    {{ super() }}
 {% endblock linkbar %}
 
 {% block content %}
@@ -56,8 +54,6 @@
         </div>
 
     </form>
-    <a href="{{url_for('index')}}">Home Page</a>
-    <a href="{{url_for('collection')}}">Display Collection</a>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="static/validate.js"></script>
 {% endblock %}

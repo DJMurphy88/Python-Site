@@ -6,12 +6,11 @@
 {% endblock head %}
 
 {% block linkbar %}
-    <a href="{{url_for('index')}}">Home Page</a>
-    <a href="{{url_for('collection')}}">Display Collection</a>
-    Submit Game
+    {{ super() }}
 {% endblock linkbar %}
 
 {% block content %}
+    <h3>Submission Form</h3>
     <form method="POST" action="" enctype="multipart/form-data"
           name="submission_form" id="submission_form">
         <div>
@@ -22,7 +21,7 @@
         <div>
             <label for= "system">System</label>
             <input type="text" name="system" id="system">
-            <span>*</span>
+            <span class>*</span>
         </div>
         <div>
             <label for="release_date">Release Date</label>
@@ -48,8 +47,6 @@
         </div>
 
     </form>
-    <a href="{{url_for('index')}}">Home Page</a>
-    <a href="{{url_for('collection')}}">Display Collection</a>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="static/scripts/validate.js"></script>
 {% endblock %}

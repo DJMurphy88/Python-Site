@@ -10,15 +10,45 @@
 {% endblock header %}
 
 {% block linkbar %}
-    Home Page
-    <a href="{{url_for('collection')}}">Display Collection</a>
-    <a href="{{url_for('submission')}}">Submit Game</a>
 {% endblock linkbar %}
 
 {% block content %}
-Collection stats:
-total games:
-Completed:
-Most popular System:
-Most popular Genre:
+
+    <h3>Collection stats:</h3>
+    total games: {{ total_games }}
+    <br>
+    Completed games: {{ completed }}
+    <br>
+    Most popular System: {{ system }}
+    <br>
+    Most popular Genre: {{ genre }}
+
+    <h3>Latest game added:</h3>
+    <table align="center" width="60%" class="table">
+        <tbody>
+            <tr>
+                <td class="table-image" rowspan="3" width="250">
+                    <img src="static/images/{{ last_game.getImage() }}" width="250" height="200">
+                </td>
+                <td  class="table-title">
+                    {{ last_game.getTitle() }}
+                </td>
+            </tr>
+            <tr>
+                <td class="table-info">
+                    System: {{ last_game.getSystem() }}
+                    <br>
+                    Release Date: {{ last_game.getDate() }}
+                    <br>
+                    Genre: {{ last_game.getGenre() }}
+                    <br>
+                    Completed: {{ last_game.getComplete() }}
+                    <br>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
 {% endblock content %}

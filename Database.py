@@ -23,6 +23,39 @@ def get_row_count():
 
     return results[0]
 
+def get_complete():
+    query = '''SELECT COUNT(*) FROM games where complete == "Yes"'''
+    with closing(conn.cursor()) as c:
+        c.execute(query)
+        results = c.fetchone()
+
+    return results[0]
+
+def get_most_system():
+    query = '''SELECT system, COUNT(system) AS 'value_count'
+            FROM Games
+            GROUP BY system
+            ORDER BY 'value_count' DESC
+            LIMIT 1'''
+    with closing(conn.cursor()) as c:
+        c.execute(query)
+        results = c.fetchone()
+
+    return results[0]
+
+def get_most_genre():
+    query = '''SELECT genre, COUNT(genre) AS 'value_count'
+            FROM Games
+            GROUP BY genre
+            ORDER BY 'value_count' DESC
+            LIMIT 1'''
+    with closing(conn.cursor()) as c:
+        c.execute(query)
+        results = c.fetchone()
+
+    return results[0]
+
+
 def make_game(row):
     return Game(row["gameid"], row["title"], row["image"], row["system"],
                 row["release_date"], row["genre"], row["complete"])
@@ -74,6 +107,14 @@ def get_game(gameid):
         game.append(make_game(row))
 
     return game[0]
+
+def get_last():
+    query = '''SELECT * FROM Games ORDER BY gameid DESC'''
+    with closing(conn.cursor()) as c:
+        c.execute(query)
+        result = c.fetchone()
+
+    return make_game(result)
 
 def add_game(game):
     query = '''INSERT INTO Games (title, image, system, release_date, genre, complete) Values(?, ?, ?, ?, ?, ?)'''

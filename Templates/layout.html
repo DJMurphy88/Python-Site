@@ -3,24 +3,26 @@
 <head>
     {% block head %}
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %} - Collection Page</title>
+    <title>{% block title %}{% endblock title %} - Collection Page</title>
     <link rel="stylesheet" href="static/layout.css">
     {% endblock head %}
 </head>
 <header>
-    <div align="center">
+    <div class="content">
         {% block header %}
         <h1 align="center">Game Collection</h1>
         {% endblock header %}
     </div>
-    <div align="center">
-        {% block linkbar %}
-        {% endblock linkbar %}
-    </div>
-
 </header>
 <body>
-    <div>
+    <div class="content">
+        <ul>
+            <li><a href="{{url_for('index')}}">Home Page</a></li>
+            <li><a href="{{url_for('collection')}}">Display Collection</a></li>
+            <li><a href="{{url_for('submission')}}">Submit Game</a></li>
+        </ul>
+    </div>
+    <div class="content">
         {% block content %}
         {% endblock content %}
     </div>

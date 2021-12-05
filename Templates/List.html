@@ -6,10 +6,7 @@
 {% endblock head %}
 
 {% block linkbar %}
-    <a href="{{url_for('index')}}">Home Page</a>
-    <a href="{{url_for('collection')}}">Display Collection</a>
-    List Games
-    <a href="{{url_for('submission')}}">Submit Game</a>
+    {{ super() }}
 {% endblock linkbar %}
 
 {% block content %}

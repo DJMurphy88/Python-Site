@@ -11,8 +11,14 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jfif']
 
 @app.route("/")
 def index():
+    Database.connect()
+    last_game = Database.get_last()
+    total_games = Database.get_row_count()
+    completed = Database.get_complete()
+    system = Database.get_most_system()
+    genre = Database.get_most_genre()
 
-    return render_template("index.html")
+    return render_template("index.html", last_game=last_game, total_games=total_games, completed=completed, system=system, genre=genre)
 
 @app.route("/collection", methods=['GET'])
 def collection():

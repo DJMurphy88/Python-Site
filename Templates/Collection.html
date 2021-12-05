@@ -6,31 +6,34 @@
 {% endblock head %}
 
 {% block linkbar %}
-    <a href="{{url_for('index')}}">Home Page</a>
-    Display Collection
-    <a href="{{url_for('submission')}}">Submit Game</a>
+    {{ super() }}
 {% endblock linkbar %}
 
 {% block content %}
-    <p align="center">
-        Sort by:
-        {% if sort == "system" %}
-        <a href="{{url_for('collection', sort='title')}}">Title</a>
-        System
-        <a href="{{url_for('collection', sort='genre')}}">Genre</a>
-        {% elif sort == "genre" %}
-        <a href="{{url_for('collection', sort='title')}}">Title</a>
-        <a href="{{url_for('collection', sort=system)}}">System</a>
-        genre
-        {% else %}
-        Title
-        <a href="{{url_for('collection', sort='system')}}">System</a>
-        <a href="{{url_for('collection', sort='genre')}}">Genre</a>
-        {% endif %}
-    </p>
-    {% for game in games %}
+
     <table align="center" width="60%" class="table">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    Sort by:
+                    {% if sort == "system" %}
+                    <a href="{{url_for('collection', sort='title')}}">Title</a>
+                    System
+                    <a href="{{url_for('collection', sort='genre')}}">Genre</a>
+                    {% elif sort == "genre" %}
+                    <a href="{{url_for('collection', sort='title')}}">Title</a>
+                    <a href="{{url_for('collection', sort='system')}}">System</a>
+                    genre
+                    {% else %}
+                    Title
+                    <a href="{{url_for('collection', sort='system')}}">System</a>
+                    <a href="{{url_for('collection', sort='genre')}}">Genre</a>
+                    {% endif %}
+                </th>
+            </tr>
+        </thead>
         <tbody>
+            {% for game in games %}
             <tr>
                 <td class="table-image" rowspan="3" width="250">
                     <img src="static/images/{{ game.getImage() }}" width="250" height="200">
@@ -57,7 +60,8 @@
                     <a href="{{ url_for('delete', gameid=game.getGameID()) }}">Delete</a>
                 </td>
             </tr>
+        {% endfor %}
         </tbody>
     </table>
-    {% endfor %}
+
 {% endblock content %}
