@@ -10,43 +10,48 @@
 {% endblock linkbar %}
 
 {% block content %}
-    <h3>Submission Form</h3>
-    <form method="POST" action="" enctype="multipart/form-data"
-          name="submission_form" id="submission_form">
-        <div>
-            <label for= "title">Title:</label>
-            <input type="text" name="title" id="title">
-            <span>*</span>
-        </div>
-        <div>
-            <label for= "system">System</label>
-            <input type="text" name="system" id="system">
-            <span class>*</span>
-        </div>
-        <div>
-            <label for="release_date">Release Date</label>
-            <input type="text" name="release_date" id="release_date">
-            <span>*</span>
-        </div>
-        <div>
-            <label for="genre">Genre:</label>
-            <input type="text" name="genre" id="genre">
-            <span>*</span>
-        </div>
-        <div>
-            <label>Completed</label>
-            <input type="radio" name="completed" id="no" value="No" class="left" checked>No
-            <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
-        </div>
-        <div>
-            <label>Image:</label>
-            <input type="file" name="file" accept=".png, .jfif, .jpg, .jpeg">
-        </div>
-        <div>
-            <input type="submit" value="Submit">
-        </div>
-
-    </form>
+<table align="center" width="60%" class="table">
+    <tr>
+        <td>
+            <h3 align="center">Submission Form</h3>
+            <form method="POST" action="" enctype="multipart/form-data"
+                  name="submission_form" id="submission_form">
+                <div>
+                    <label for= "title">Title:</label>
+                    <input type="text" name="title" id="title">
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for= "system">System:</label>
+                    <input type="text" name="system" id="system">
+                    <span class>*</span>
+                </div>
+                <div>
+                    <label for="release_date">Release Date:</label>
+                    <input type="text" name="release_date" id="release_date">
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for="genre">Genre:</label>
+                    <input type="text" name="genre" id="genre">
+                    <span>*</span>
+                </div>
+                <div>
+                    <label>Completed:</label>
+                    <input type="radio" name="completed" id="no" value="No" class="left" checked>No
+                    <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
+                </div>
+                <div>
+                    <label>Image:</label>
+                    <input type="file" name="file" accept=".png, .jfif, .jpg, .jpeg">
+                </div>
+                <div>
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="static/scripts/validate.js"></script>
 {% endblock %}

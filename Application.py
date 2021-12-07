@@ -37,14 +37,6 @@ def collection():
 
     return render_template("Collection.html", games=games, sort=sort)
 
-@app.route("/listGames")
-def listGames():
-    Database.connect()
-    games = Database.get_games()
-    Database.close()
-
-    return render_template("List.html", games=games)
-
 @app.route("/submission")
 def submission():
     return render_template("Submission.html")

@@ -10,50 +10,61 @@
 {% endblock linkbar %}
 
 {% block content %}
-    <form method="POST" action="" enctype="multipart/form-data"
-          name="update_form" id="update_form">
-        <div>
-            <label for= "title">Title:</label>
-            <input type="text" name="title" id="title" value="{{ game.getTitle() }}">
-            <span>*</span>
-        </div>
-        <div>
-            <label for= "system">System</label>
-            <input type="text" name="system" id="system" value="{{ game.getSystem() }}">
-            <span>*</span>
-        </div>
-        <div>
-            <label for="release_date">Release Date</label>
-            <input type="text" name="release_date" id="release_date" value="{{ game.getDate() }}">
-            <span>*</span>
-        </div>
-        <div>
-            <label for="genre">Genre:</label>
-            <input type="text" name="genre" id="genre" value="{{ game.getGenre() }}">
-            <span>*</span>
-        </div>
-        <div>
-            <label>Completed</label>
-            {% if game.getComplete() == "Yes" %}
-                <input type="radio" name="completed" id="no" value="No" class="left">No
-                <input type="radio" name="completed" id="yes" value="Yes" class="left last" checked>Yes
-            {% elif game.getComplete() == "No" %}
-                <input type="radio" name="completed" id="no" value="No" class="left" checked>No
-                <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
-            {% else %}
-                <input type="radio" name="completed" id="no" value="No" class="left">No
-                <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
-            {% endif %}
-        </div>
-        <div>
-            <label>Image:</label>
-            <input type="file" name="file" accept=".png, .jfif, .jpg, .jpeg">
-        </div>
-        <div>
-            <input type="submit" value="Update">
-        </div>
-
-    </form>
+<table align="center" width="60%" class="table">
+    <tr>
+        <td id="image" align="center">
+            <img src="static/images/{{ game.getImage() }}" width="250" height="200">
+            <h3 align="center">Current image</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form method="POST" action="" enctype="multipart/form-data"
+                  name="update_form" id="update_form">
+                <div>
+                    <label for= "title">Title:</label>
+                    <input type="text" name="title" id="title" value="{{ game.getTitle() }}">
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for= "system">System</label>
+                    <input type="text" name="system" id="system" value="{{ game.getSystem() }}">
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for="release_date">Release Date</label>
+                    <input type="text" name="release_date" id="release_date" value="{{ game.getDate() }}">
+                    <span>*</span>
+                </div>
+                <div>
+                    <label for="genre">Genre:</label>
+                    <input type="text" name="genre" id="genre" value="{{ game.getGenre() }}">
+                    <span>*</span>
+                </div>
+                <div>
+                    <label>Completed</label>
+                    {% if game.getComplete() == "Yes" %}
+                        <input type="radio" name="completed" id="no" value="No" class="left">No
+                        <input type="radio" name="completed" id="yes" value="Yes" class="left last" checked>Yes
+                    {% elif game.getComplete() == "No" %}
+                        <input type="radio" name="completed" id="no" value="No" class="left" checked>No
+                        <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
+                    {% else %}
+                        <input type="radio" name="completed" id="no" value="No" class="left">No
+                        <input type="radio" name="completed" id="yes" value="Yes" class="left last">Yes
+                    {% endif %}
+                </div>
+                <div>
+                    <label>Image:</label>
+                    <input type="file" name="file" accept=".png, .jfif, .jpg, .jpeg">
+                </div>
+                <div>
+                    <input type="submit" value="Update">
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="static/validate.js"></script>
 {% endblock %}

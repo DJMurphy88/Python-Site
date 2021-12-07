@@ -11,7 +11,7 @@
 
 {% block content %}
 
-    <table align="center" width="60%" class="table">
+    <table align="center" width="60%">
         <thead>
             <tr>
                 <th colspan="2">
@@ -35,15 +35,15 @@
         <tbody>
             {% for game in games %}
             <tr>
-                <td class="table-image" rowspan="3" width="250">
+                <td id="image" rowspan="3">
                     <img src="static/images/{{ game.getImage() }}" width="250" height="200">
                 </td>
-                <td  class="table-title">
-                    {{ game.getTitle() }}
+                <td id="title">
+                    <b>{{ game.getTitle() }}</b>
                 </td>
             </tr>
             <tr>
-                <td class="table-info">
+                <td id="info">
                     System: {{ game.getSystem() }}
                     <br>
                     Release Date: {{ game.getDate() }}
